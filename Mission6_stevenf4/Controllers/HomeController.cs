@@ -12,15 +12,36 @@ namespace Mission6_stevenf4.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieContext blahContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieContext someName)
         {
             _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Podcast()
+        {
+            return View("Podcast");
+        }
+
+        [HttpGet]
+        public IActionResult MovieEntry()
+        {
+            return View("M");
+        }
+
+        [HttpPost]
+        public IActionResult MovieEntry(ApplicationResponse ar)
+        {
+            blahContext.Add(ar);
+            blahContext.SaveChanges();
+            return View("Confirmation", ar);
         }
 
         public IActionResult Privacy()

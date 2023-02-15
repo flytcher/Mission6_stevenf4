@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = 'M';
+}
+@model Mission6_stevenf4.Models.ApplicationResponse
+
+<h1>Movie Entry</h1>
+<div>
+    <form method="post"> @*Form to handle all the inputs for a movie*@
+        <label input asp-for="category">Category</label>
+        <input input asp-for="category" /><br />
+
+        <label input asp-for="title">Title</label>
+        <input input asp-for="title" /><br />
+
+        <label input asp-for="year">Year</label>
+        <input input asp-for="year" /><br />
+
+        <label input asp-for="director">Director</label>
+        <input input asp-for="director" /><br />
+
+
+        <label asp-for="rating">Rating</label>
+        <select asp-for="rating" class="form-control">
+            <option value="">Select a rating</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select><br />
+
+        <button type="submit">Submit Movie</button>
+    </form>
+</div>
