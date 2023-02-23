@@ -6,8 +6,18 @@
 <h1>Movie Entry</h1>
 <div>
     <form method="post"> @*Form to handle all the inputs for a movie *@
-        <label input asp-for="category">Category</label>
-        <input input asp-for="category" /><br />
+        
+        <div asp-validation-summary="All"></div>
+
+        <label input asp-for="categoryID">Category</label>
+        <select asp-for="categoryID">
+            <option value="">Select a Category:</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.categoryID">@c.categoryName</option>
+            }
+
+        </select><br />
 
         <label input asp-for="title">Title</label>
         <input input asp-for="title" /><br />

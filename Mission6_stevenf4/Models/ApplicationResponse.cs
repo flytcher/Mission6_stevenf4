@@ -11,10 +11,13 @@ namespace Mission6_stevenf4.Models
         [Key]
         [Required]
         public int MovieID { get; set; }
-        public string category { get; set; }
+        public int categoryID { get; set; }
+        [Required]
         public string title { get; set; }
         public int year { get; set; }
         public string director { get; set; }
         public string rating {get; set; }
+
+        public Category category { get; set; }
     }
 }

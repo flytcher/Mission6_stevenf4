@@ -15,14 +15,29 @@ namespace Mission6_stevenf4.Models
         }
 
         public DbSet<ApplicationResponse> Responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
+        //seeding the data
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Category>().HasData(
+                new Category { categoryID=1, categoryName="Action"},
+                new Category { categoryID =2, categoryName = "Adventure" },
+                new Category { categoryID =3, categoryName = "Comedy" },
+                new Category { categoryID =4, categoryName = "Drama" },
+                new Category { categoryID =5, categoryName = "Fantasy" },
+                new Category { categoryID =6, categoryName = "Horror" },
+                new Category { categoryID =7, categoryName = "Mystery" },
+                new Category { categoryID =8, categoryName = "Romance" },
+                new Category { categoryID =9, categoryName = "Thriller" }
+                
+            );
+
             mb.Entity<ApplicationResponse>().HasData(
                 new ApplicationResponse
                 {
                     MovieID = 1,
-                    category = "Comedy",
+                    categoryID = 3,
                     title = "Nacho Libre",
                     year = 2006,
                     director = "Jared Hess",
@@ -31,7 +46,7 @@ namespace Mission6_stevenf4.Models
                 new ApplicationResponse
                 {
                     MovieID = 2,
-                    category = "Adventure",
+                    categoryID = 2,
                     title = "Interstellar",
                     year = 2014,
                     director = "Christopher Nolan",
@@ -40,7 +55,7 @@ namespace Mission6_stevenf4.Models
                 new ApplicationResponse
                 {
                     MovieID = 3,
-                    category = "Comedy",
+                    categoryID = 3,
                     title = "Puss in Boots: The Last Wish",
                     year = 2022,
                     director = "Joel Crawford",

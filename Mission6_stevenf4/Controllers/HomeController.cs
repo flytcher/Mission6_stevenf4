@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission6_stevenf4.Models;
 using System;
@@ -11,13 +12,11 @@ namespace Mission6_stevenf4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MovieContext blahContext { get; set; }
+        private MovieContext mContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, MovieContext someName)
+        public HomeController ( MovieContext someName)
         {
-            _logger = logger;
-            blahContext = someName;
+            mContext = someName;
         }
 
         public IActionResult Index()
@@ -33,26 +32,78 @@ namespace Mission6_stevenf4.Controllers
         [HttpGet]
         public IActionResult MovieEntry()
         {
+            ViewBag.Categories = mContext.Categories.ToList();
+
+            var categories = mContext.Categories.ToList();
+
             return View("M");
         }
 
         [HttpPost]
         public IActionResult MovieEntry(ApplicationResponse ar)
         {
-            blahContext.Add(ar);
-            blahContext.SaveChanges();
-            return View("Confirmation", ar);
+            if (ModelState.IsValid)
+            {
+                mContext.Add(ar);
+                mContext.SaveChanges();
+
+                return View("Confirmation", ar);
+            }
+            else
+            {
+                ViewBag.Categories = mContext.Categories.ToList();
+
+                return View("M");
+            }
+
+
         }
 
-        public IActionResult Privacy()
+        public IActionResult MovieList()
         {
-            return View();
+            var movies = mContext.Responses
+                .Include(x => x.category)
+                .ToList();
+
+            return View(movies);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Edit (int movieid)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.Categories = mContext.Categories.ToList();
+
+            var entry = mContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View("M", entry);
         }
+
+        [HttpPost]
+
+        public IActionResult Edit (ApplicationResponse blah)
+        {
+            mContext.Update(blah);
+            mContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete (int movieid)
+        {
+            var entry = mContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View(entry);
+        }
+
+        [HttpPost]
+
+        public IActionResult Delete (ApplicationResponse ar)
+        {
+            mContext.Responses.Remove(ar);
+            mContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
     }
 }
