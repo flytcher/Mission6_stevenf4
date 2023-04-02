@@ -26,7 +26,10 @@ namespace Mission6_stevenf4.Models
                     title = "Nacho Libre",
                     year = 2006,
                     director = "Jared Hess",
-                    rating = "PG"
+                    rating = "PG",
+                    edited = false,
+                    lentTo = "Steven"
+
                 },
                 new ApplicationResponse
                 {
@@ -35,7 +38,9 @@ namespace Mission6_stevenf4.Models
                     title = "Interstellar",
                     year = 2014,
                     director = "Christopher Nolan",
-                    rating = "PG-13"
+                    rating = "PG-13",
+                    edited = true,
+                    lentTo = ""
                 },
                 new ApplicationResponse
                 {
@@ -44,7 +49,9 @@ namespace Mission6_stevenf4.Models
                     title = "Puss in Boots: The Last Wish",
                     year = 2022,
                     director = "Joel Crawford",
-                    rating = "PG"
+                    rating = "PG",
+                    edited = false,
+                    lentTo = ""
                 }
 
                 );

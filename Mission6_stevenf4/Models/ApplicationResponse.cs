@@ -16,5 +16,7 @@ namespace Mission6_stevenf4.Models
         public int year { get; set; }
         public string director { get; set; }
         public string rating {get; set; }
+        public bool edited { get; set; }
+        public string lentTo { get; set; }
     }
 }

@@ -5,7 +5,8 @@
 
 <h1>Movie Entry</h1>
 <div>
-    <form method="post"> @*Form to handle all the inputs for a movie*@
+    <form method="post">
+        @*Form to handle all the inputs for a movie*@
         <label input asp-for="category">Category</label>
         <input input asp-for="category" /><br />
 
@@ -27,6 +28,12 @@
             <option value="PG-13">PG-13</option>
             <option value="R">R</option>
         </select><br />
+
+        <label input asp-for="edited">Edited</label>
+        <input type="checkbox" input asp-for="edited" /><br />
+
+        <label input asp-for="lentTo">Lent to</label>
+        <input input asp-for="lentTo" /><br />
 
         <button type="submit">Submit Movie</button>
     </form>
